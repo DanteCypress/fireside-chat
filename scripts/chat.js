@@ -51,16 +51,12 @@ class Chatroom {
   }
 }
 
-const chatroom = new Chatroom("General", "Dante");
-chatroom.getChats(data => {
-  console.log(data);
-});
-setTimeout(() => {
-  chatroom.updateRoom("general");
-  chatroom.updateName("Cypress");
-  chatroom.getChats(data => {
-    console.log(data);
-  });
-  chatroom.addChat("hello");
-}, 3000);
-chatroom.updateRoom("general");
+// setTimeout(() => {
+//   chatroom.updateRoom("general");
+//   chatroom.updateName("Cypress");
+//   chatroom.getChats(data => {
+//     console.log(data);
+//   });
+//   chatroom.addChat("hello");
+// }, 3000);
+// chatroom.updateRoom("general");
