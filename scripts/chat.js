@@ -10,7 +10,8 @@ class Chatroom {
   constructor(room, username) {
     (this.room = room),
       (this.username = username),
-      (this.chats = db.collection("chats"));
+      (this.chats = db.collection("chats")),
+      this.unsub;
   }
   async addChat(message) {
     //format chat object
@@ -26,7 +27,7 @@ class Chatroom {
     return response;
   }
   getChats(callbackFn) {
-    this.chats
+    this.unsub = this.chats
       .where("room", "==", this.room)
       .orderBy("posted_at")
       .onSnapshot(snapshot => {
@@ -38,9 +39,28 @@ class Chatroom {
         });
       });
   }
+  updateName(username) {
+    this.username = username;
+  }
+  updateRoom(room) {
+    this.room = room;
+    console.log(room, "current room");
+    if (this.sub) {
+      this.unsub();
+    }
+  }
 }
 
 const chatroom = new Chatroom("General", "Dante");
 chatroom.getChats(data => {
   console.log(data);
 });
+setTimeout(() => {
+  chatroom.updateRoom("general");
+  chatroom.updateName("Cypress");
+  chatroom.getChats(data => {
+    console.log(data);
+  });
+  chatroom.addChat("hello");
+}, 3000);
+chatroom.updateRoom("general");
