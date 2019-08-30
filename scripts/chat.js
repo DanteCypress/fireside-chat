@@ -26,20 +26,21 @@ class Chatroom {
     return response;
   }
   getChats(callbackFn) {
-    this.chats.onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(change => {
-        if (change.type === "added") {
-          //update ui
-          callbackFn(change.doc.data());
-        }
+    this.chats
+      .where("room", "==", this.room)
+      .orderBy("posted_at")
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+          if (change.type === "added") {
+            //update ui
+            callbackFn(change.doc.data());
+          }
+        });
       });
-    });
   }
 }
 
-const chatroom = new Chatroom("general", "Dante");
-console.log(chatroom);
-
+const chatroom = new Chatroom("General", "Dante");
 chatroom.getChats(data => {
   console.log(data);
 });
