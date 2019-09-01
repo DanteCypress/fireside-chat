@@ -52,11 +52,11 @@ class Chatroom {
 }
 
 // setTimeout(() => {
-//   chatroom.updateRoom("general");
+//   chatroom.updateRoom("JavaScript");
 //   chatroom.updateName("Cypress");
 //   chatroom.getChats(data => {
 //     console.log(data);
 //   });
 //   chatroom.addChat("hello");
 // }, 3000);
-// chatroom.updateRoom("general");
+// chatroom.updateRoom("JavaScript");
